@@ -7,18 +7,24 @@ import {getDataToState} from '../actions/actions.js';
 // The below line is here as an example of getting prices
 
 class App extends PureComponent {
-    constructor() {
-        super(undefined);
+    constructor(props) {
+        super(props);
+        this.change = null;
     }
     componentDidMount = () => {
-        connectToServer('BTC', this.props.getQuotes);
+        connectToServer('AAPL', this.props.getQuotes);
+    }
+    componentDidUpdate = (prev) => {
+        this.change = prev.quotes.quote;
     }
     render() {
         const {quotes} = this.props;
         if (!quotes) {
             return <p>Нет данных!</p>;
         }
-        return <Quote quotes={quotes}/>;
+        if (quotes) {
+            return <Quote quotes={quotes} />;
+        }
     }
 }
 const mapStateToProps = (state) => {
