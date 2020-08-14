@@ -3,24 +3,22 @@ import {connectToServer} from '../services/tickerService.js';
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import Quote from './Quote.js';
+import {getDataToState} from '../actions/actions.js';
 // The below line is here as an example of getting prices
 
 class App extends PureComponent {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super(undefined);
     }
     componentDidMount = () => {
-        connectToServer('BTC', this.propsDispatch);
-    }
-    propsDispatch = (data) => {
-        return this.props.dispatch({type: 'GET_DATA_TO_STATE', payload: data});
+        connectToServer('BTC', this.props.getQuotes);
     }
     render() {
-        const quotes = this.props;
-        if (!quotes.length) {
+        const {quotes} = this.props;
+        if (!quotes) {
             return <p>Нет данных!</p>;
         }
-        return quotes.map(quote => <Quote quotes={quote}/>);
+        return <Quote quotes={quotes}/>;
     }
 }
 const mapStateToProps = (state) => {
@@ -28,5 +26,9 @@ const mapStateToProps = (state) => {
         quotes: state
     };
 };
-
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => {
+    return {
+        getQuotes: data => dispatch(getDataToState(data))
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

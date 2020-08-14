@@ -1,6 +1,9 @@
 import {GET_DATA_TO_STATE} from '../actions/types.js';
 
-const stockTicker = (state = {}, action) => {
+const initialState = {
+};
+
+const stockTicker = (state = initialState, action) => {
     switch (action.type) {
         case GET_DATA_TO_STATE:
             const newAction = JSON.parse(action.payload);
