@@ -2,6 +2,9 @@ body {
 	box-sizing: border-box;
 }
 .container {
+	display: flex;
+	align-items: center;
+	height: 2rem;
 	margin: 1rem;
 	padding: 1rem;
 	border: 2px solid #ccc;
@@ -15,5 +18,26 @@ body {
 	}
 	&-value {
 		font-weight: bold;
+		margin-right: 1rem;
+		&-up {
+			color: #21970e;
+		}
+		&-down {
+			color: #960a0a;
+		}
+	}
+	&-up {
+		display: inline-block;
+		width: 2rem;
+		height: 2rem;
+		background: url(./img/up.png);
+		background-size: cover;
+	}
+	&-down {
+		display: inline-block;
+		width: 2rem;
+		height: 2rem;
+		background: url(./img/down.png);
+		background-size: cover;
 	}
 }

@@ -14,11 +14,11 @@ class App extends PureComponent {
     componentDidMount = () => {
         connectToServer('AAPL', this.props.getQuotes);
     }
-    componentDidUpdate = (prev) => {
-        this.change = prev.quotes.quote;
-    }
     render() {
         const {quotes} = this.props;
+        // Удалить
+        console.log(quotes);
+        // qwe
         if (!quotes) {
             return <p>Нет данных!</p>;
         }
